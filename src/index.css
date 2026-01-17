@@ -24,10 +24,10 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  /* More subtle, professional gradient */
+  /* Subtle grayscale gradient */
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(109, 40, 217, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.08) 0%, transparent 45%);
+    radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.03) 0%, transparent 45%);
 }
 
 * {
@@ -51,10 +51,7 @@ button {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ddd6fe 0%, #bae6fd 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
 }
 
 /* Custom Scrollbar for the Privacy List */

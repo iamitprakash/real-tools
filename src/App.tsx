@@ -1,10 +1,89 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, RefreshCw, Lock, Sparkles, CheckCircle, Shield, MapPin, Camera, Calendar, User, FileText, FileType } from 'lucide-react';
+import { Download, RefreshCw, Lock, Sparkles, CheckCircle, Shield, MapPin, Camera, Calendar, User, FileText, FileType, Layout, Image as ImageIcon } from 'lucide-react';
 import { ImageUploader } from './components/ImageUploader';
 import { removeMetadata, formatBytes } from './utils/fileProcessor';
+import { FormBuilder } from './components/FormBuilder/FormBuilder';
 
 function App() {
+  const [activeTab, setActiveTab] = useState<'home' | 'builder'>('home');
+
+  return (
+    <div className="min-h-screen flex flex-col items-center py-20 px-4 relative overflow-hidden font-sans">
+      
+      {/* Background Decorative Elements */}
+      <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-zinc-800/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-zinc-800/10 rounded-full blur-[120px]" />
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-8 relative z-10 w-full max-w-2xl"
+      >
+        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
+          <button
+            onClick={() => setActiveTab('home')}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+              activeTab === 'home' 
+                ? 'bg-white/20 text-white shadow-lg shadow-white/10' 
+                : 'text-white hover:text-white'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Shield className="w-3.5 h-3.5" />
+              Metadata Remover
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab('builder')}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+              activeTab === 'builder' 
+                ? 'bg-white/20 text-white shadow-lg shadow-white/10' 
+                : 'text-white/70 hover:text-white'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Layout className="w-3.5 h-3.5" />
+              Form Builder
+            </div>
+          </button>
+        </div>
+
+        {activeTab === 'home' && (
+          <>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-white leading-tight">
+              Metadata <span className="gradient-text">Remover</span>
+            </h1>
+            <p className="text-white text-lg leading-relaxed max-w-lg mx-auto">
+              Instantly strip sensitive Exif, XMP, and IPTC data from your photos and PDFs.
+              <br/>
+              <span className="text-white/70 text-base">Processing happens entirely in your browser.</span>
+            </p>
+          </>
+        )}
+      </motion.div>
+
+      <div className="w-full relative z-10">
+        <AnimatePresence mode="wait">
+          {activeTab === 'home' ? (
+            <Home key="home" />
+          ) : (
+            <FormBuilder key="builder" />
+          )}
+        </AnimatePresence>
+      </div>
+
+      <footer className="mt-auto pt-20 pb-6 text-zinc-600 text-sm flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+        <Lock className="w-3 h-3" />
+        <span>Secure Local Processing • No Server Uploads</span>
+      </footer>
+    </div>
+  );
+}
+
+function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [processedBlob, setProcessedBlob] = useState<Blob | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -47,52 +126,30 @@ function App() {
 
   const InfoItem = ({ icon: Icon, label }: { icon: React.ElementType, label: string }) => (
     <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
-      <div className="p-2 rounded-full bg-violet-500/10 text-violet-400">
+      <div className="p-2 rounded-full bg-white/10 text-white">
         <Icon className="w-4 h-4" />
       </div>
-      <span className="text-sm text-zinc-300 font-medium">{label}</span>
-      <div className="ml-auto text-xs font-bold text-green-400 bg-green-500/10 px-2 py-1 rounded">
+      <span className="text-sm text-white font-medium">{label}</span>
+      <div className="ml-auto text-xs font-bold text-white bg-white/20 px-2 py-1 rounded">
         REMOVED
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-20 px-4 relative overflow-hidden font-sans">
-      
-      {/* Background Decorative Elements */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-900/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 rounded-full blur-[120px]" />
-      </div>
-
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-16 relative z-10 w-full max-w-2xl"
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-violet-300 mb-8 backdrop-blur-md shadow-lg shadow-violet-500/5">
-          <Shield className="w-4 h-4" />
-          <span>Professional Privacy Tool</span>
-        </div>
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-white leading-tight">
-          Metadata <span className="gradient-text">Remover</span>
-        </h1>
-        <p className="text-zinc-400 text-lg leading-relaxed max-w-lg mx-auto">
-          Instantly strip sensitive Exif, XMP, and IPTC data from your photos.
-          <br/>
-          <span className="text-zinc-500 text-base">Processing happens entirely in your browser.</span>
-        </p>
-      </motion.div>
-
-      <div className="w-full relative z-10">
-        <AnimatePresence mode="wait">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="w-full"
+    >
+      <AnimatePresence mode="wait">
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-md p-4 bg-red-500/10 border border-red-500/20 text-red-200 rounded-xl text-center mb-6"
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-md p-4 bg-zinc-800/50 border border-zinc-700 text-white rounded-xl text-center mb-6"
             >
               {error}
             </motion.div>
@@ -116,12 +173,12 @@ function App() {
               {/* Left Column: Image & Stats */}
               <div className="glass-panel p-6 flex flex-col items-center text-center h-full justify-between">
                 <div className="w-full">
-                  <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6 mx-auto ring-4 ring-green-500/5">
-                    <CheckCircle className="w-10 h-10 text-green-400" />
+                  <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 mx-auto ring-4 ring-white/5">
+                    <CheckCircle className="w-10 h-10 text-white" />
                   </div>
                   
                   <h3 className="text-2xl font-bold text-white mb-2">Sanitization Complete</h3>
-                  <p className="text-zinc-400 mb-8 text-sm">
+                  <p className="text-white/80 mb-8 text-sm">
                     Your file has been scrubbed and cleaned.
                   </p>
 
@@ -137,8 +194,8 @@ function App() {
                       <div className="text-left overflow-hidden">
                         <p className="text-sm font-medium text-white truncate w-full" title={file?.name}>{file?.name}</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-zinc-500 bg-white/5 px-2 py-0.5 rounded">{file?.type.split('/')[1].toUpperCase()}</span>
-                          <span className="text-xs text-zinc-500">{formatBytes(processedBlob.size)}</span>
+                          <span className="text-xs text-white/70 bg-white/5 px-2 py-0.5 rounded">{file?.type.split('/')[1].toUpperCase()}</span>
+                          <span className="text-xs text-white/70">{formatBytes(processedBlob.size)}</span>
                         </div>
                       </div>
                     </div>
@@ -148,9 +205,9 @@ function App() {
                 <div className="w-full space-y-3">
                   <button
                     onClick={handleDownload}
-                    className="w-full py-5 bg-gradient-to-r from-green-500 to-emerald-400 text-white text-lg font-black tracking-wide rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] hover:shadow-green-500/50 transition-all shadow-xl shadow-green-500/30 active:scale-[0.98] animate-pulse-subtle border border-green-400/50"
+                    className="w-full py-5 bg-white text-black text-lg font-black tracking-wide rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] hover:shadow-white/20 transition-all shadow-xl shadow-black/30 active:scale-[0.98] animate-pulse-subtle border border-white/50"
                   >
-                    <Download className="w-6 h-6 stroke-[3] text-white" /> DOWNLOAD CLEAN FILE
+                    <Download className="w-6 h-6 stroke-[3] text-black" /> DOWNLOAD CLEAN FILE
                   </button>
                   <button
                     onClick={handleReset}
@@ -164,7 +221,7 @@ function App() {
               {/* Right Column: Privacy Report */}
               <div className="glass-panel p-6 flex flex-col">
                 <div className="flex items-center gap-3 mb-6 pb-6 border-b border-white/5">
-                  <div className="p-2 bg-violet-500/10 rounded-lg text-violet-400">
+                  <div className="p-2 bg-white/10 rounded-lg text-white">
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
@@ -180,7 +237,7 @@ function App() {
                    <InfoItem icon={User} label="Author & Copyright" />
                    <InfoItem icon={Sparkles} label="Software Info" />
                    <InfoItem icon={FileText} label="Embedded Keywords" />
-                   <InfoItem icon={FileText} label="Thumbnail Data" />
+                   <InfoItem icon={ImageIcon} label="Thumbnail Data" />
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-white/5 text-center">
@@ -192,13 +249,7 @@ function App() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      <footer className="mt-auto pt-20 pb-6 text-zinc-600 text-sm flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
-        <Lock className="w-3 h-3" />
-        <span>Secure Local Processing • No Server Uploads</span>
-      </footer>
-    </div>
+    </motion.div>
   );
 }
 

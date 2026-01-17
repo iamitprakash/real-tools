@@ -55,7 +55,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onFileSelect, isPr
             transition-all duration-300 ease-out
             glass-panel
             ${isDragOver 
-              ? 'border-violet-500 bg-violet-500/10 scale-[1.02]' 
+              ? 'border-white bg-white/10 scale-[1.02]' 
               : 'border-zinc-700 hover:border-zinc-500 hover:bg-white/5'
             }
           `}
@@ -82,15 +82,15 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onFileSelect, isPr
               >
                 <div className="w-16 h-16 mb-4 relative">
                   <motion.div
-                    className="absolute inset-0 border-4 border-violet-500/30 rounded-full"
+                    className="absolute inset-0 border-4 border-white/30 rounded-full"
                   />
                   <motion.div
-                    className="absolute inset-0 border-4 border-violet-500 border-t-transparent rounded-full"
+                    className="absolute inset-0 border-4 border-white border-t-transparent rounded-full"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   />
                 </div>
-                <p className="text-lg font-medium text-violet-200">Scrubbing Metadata...</p>
+                <p className="text-lg font-medium text-white">Scrubbing Metadata...</p>
               </motion.div>
             ) : (
               <motion.div
@@ -102,19 +102,19 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onFileSelect, isPr
               >
                 <div className={`
                   w-20 h-20 mb-6 rounded-2xl flex items-center justify-center
-                  bg-gradient-to-br from-violet-500/20 to-blue-500/20
-                  group-hover:from-violet-500/30 group-hover:to-blue-500/30
+                  w-20 h-20 mb-6 rounded-2xl flex items-center justify-center
+                  bg-white/10 group-hover:bg-white/20
                   transition-all duration-300
                 `}>
-                  <Upload className="w-10 h-10 text-violet-300 group-hover:scale-110 transition-transform duration-300" />
+                  <Upload className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   Drop your image or PDF here
                 </h3>
-                <p className="text-zinc-400 mb-6">
-                  or <span className="text-violet-400 underline decoration-violet-400/30 underline-offset-4 group-hover:text-violet-300">browse files</span>
+                <p className="text-white mb-6">
+                  or <span className="text-white underline decoration-white/30 underline-offset-4 group-hover:text-white">browse files</span>
                 </p>
-                <div className="flex items-center gap-4 text-xs text-zinc-500 uppercase tracking-wider font-medium">
+                <div className="flex items-center gap-4 text-xs text-white uppercase tracking-wider font-medium">
                   <span className="flex items-center gap-1.5 bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-700/50">
                     <FileImage className="w-3.5 h-3.5" /> JPEG, PNG, PDF
                   </span>
