@@ -1,5 +1,3 @@
-import { formatJSON, validateJSON } from './jsonFormatter';
-
 /**
  * Convert XML to JSON
  */
@@ -118,7 +116,7 @@ function jsonToXml(obj: any, tagName: string): string {
   
   // Separate attributes and children
   for (const [key, value] of Object.entries(obj)) {
-    if (key === '@attributes' && typeof value === 'object') {
+    if (key === '@attributes' && typeof value === 'object' && value !== null) {
       // Add attributes
       for (const [attrName, attrValue] of Object.entries(value)) {
         attributes.push(`${attrName}="${escapeXml(String(attrValue))}"`);
@@ -196,7 +194,6 @@ export function formatXML(xmlString: string, indent: number = 2): string {
  */
 function formatXMLNode(node: Element, level: number, indent: number): string {
   const indentStr = ' '.repeat(level * indent);
-  const childIndent = ' '.repeat((level + 1) * indent);
   
   let xml = indentStr + '<' + node.tagName;
   

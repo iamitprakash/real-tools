@@ -15,7 +15,6 @@ export function computeDiff(text1: string, text2: string): DiffSegment[] {
   const lines2 = text2.split('\n');
   
   const segments: DiffSegment[] = [];
-  const maxLen = Math.max(lines1.length, lines2.length);
   
   let i = 0;
   let j = 0;
@@ -65,7 +64,6 @@ export function computeDiff(text1: string, text2: string): DiffSegment[] {
  */
 export function computeInlineDiff(text1: string, text2: string): DiffSegment[] {
   const segments: DiffSegment[] = [];
-  const maxLen = Math.max(text1.length, text2.length);
   
   let i = 0;
   let j = 0;

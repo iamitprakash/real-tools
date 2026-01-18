@@ -13,7 +13,6 @@ import {
 import { convertXMLToJSON, convertJSONToXML, formatXML, validateXML } from '../../utils/xmlJsonConverter';
 import { formatJSON, validateJSON } from '../../utils/jsonFormatter';
 import { Button } from '../ui/stateful-button';
-import { formatBytes } from '../../utils/imageProcessor';
 
 type ConversionType = 'xml-to-json' | 'json-to-xml';
 

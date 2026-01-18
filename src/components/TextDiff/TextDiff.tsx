@@ -6,8 +6,6 @@ import {
   IconRefresh,
   IconFileText,
   IconGitCompare,
-  IconPlus,
-  IconMinus,
 } from '@tabler/icons-react';
 import { computeDiff, computeInlineDiff, getDiffStats, type DiffSegment } from '../../utils/textDiff';
 import { formatBytes } from '../../utils/imageProcessor';
