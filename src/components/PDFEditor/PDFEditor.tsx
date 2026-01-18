@@ -294,7 +294,7 @@ export const PDFEditor = () => {
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={() => setMode('combine')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
+              className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
                 mode === 'combine'
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                   : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
@@ -304,7 +304,7 @@ export const PDFEditor = () => {
             </button>
             <button
               onClick={() => setMode('remove')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
+              className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
                 mode === 'remove'
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                   : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
@@ -314,7 +314,7 @@ export const PDFEditor = () => {
             </button>
             <button
               onClick={() => setMode('extract')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
+              className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
                 mode === 'extract'
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                   : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
@@ -324,7 +324,7 @@ export const PDFEditor = () => {
             </button>
             <button
               onClick={() => setMode('edit')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
+              className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
                 mode === 'edit'
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                   : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
@@ -382,7 +382,7 @@ export const PDFEditor = () => {
                     {(mode === 'remove' || mode === 'extract' || mode === 'edit') && (
                       <button
                         onClick={() => setPreviewFile(pdfFile)}
-                        className="p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all"
+                        className="p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all cursor-pointer"
                         title="Preview PDF"
                       >
                         <IconEye size={18} />
@@ -390,7 +390,7 @@ export const PDFEditor = () => {
                     )}
                     <button
                       onClick={() => removeFile(pdfFile.id)}
-                      className="p-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                      className="p-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all cursor-pointer"
                     >
                       <IconTrash size={18} />
                     </button>
@@ -407,13 +407,13 @@ export const PDFEditor = () => {
                       <div className="flex gap-2">
                         <button
                           onClick={() => selectAllPages(pdfFile.id)}
-                          className="text-xs px-2 py-1 bg-secondary hover:bg-secondary/80 rounded text-foreground"
+                          className="text-xs px-2 py-1 bg-secondary hover:bg-secondary/80 rounded text-foreground cursor-pointer"
                         >
                           Select All
                         </button>
                         <button
                           onClick={() => clearSelection(pdfFile.id)}
-                          className="text-xs px-2 py-1 bg-secondary hover:bg-secondary/80 rounded text-foreground"
+                          className="text-xs px-2 py-1 bg-secondary hover:bg-secondary/80 rounded text-foreground cursor-pointer"
                         >
                           Clear
                         </button>
@@ -426,7 +426,7 @@ export const PDFEditor = () => {
                           <button
                             key={pageNum}
                             onClick={() => togglePageSelection(pdfFile.id, pageNum)}
-                            className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all ${
+                            className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                               isSelected
                                 ? 'bg-primary text-primary-foreground shadow-md'
                                 : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
@@ -452,7 +452,7 @@ export const PDFEditor = () => {
                       <span className="text-sm font-semibold text-foreground">Text Annotations:</span>
                       <button
                         onClick={() => addTextAnnotation(pdfFile.id)}
-                        className="text-xs px-3 py-1.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all flex items-center gap-1"
+                        className="text-xs px-3 py-1.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all flex items-center gap-1 cursor-pointer"
                       >
                         <IconPlus size={14} /> Add Text
                       </button>
@@ -532,13 +532,13 @@ export const PDFEditor = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={saveTextAnnotation}
-                            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:opacity-90 transition-all flex items-center gap-1"
+                            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:opacity-90 transition-all flex items-center gap-1 cursor-pointer"
                           >
                             <IconCheck size={16} /> Save
                           </button>
                           <button
                             onClick={() => setEditingAnnotation(null)}
-                            className="px-4 py-2 bg-secondary text-foreground rounded-lg text-sm font-semibold hover:bg-secondary/80 transition-all flex items-center gap-1"
+                            className="px-4 py-2 bg-secondary text-foreground rounded-lg text-sm font-semibold hover:bg-secondary/80 transition-all flex items-center gap-1 cursor-pointer"
                           >
                             <IconX size={16} /> Cancel
                           </button>
@@ -559,7 +559,7 @@ export const PDFEditor = () => {
                             </div>
                             <button
                               onClick={() => removeTextAnnotation(pdfFile.id, index)}
-                              className="p-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                              className="p-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all cursor-pointer"
                             >
                               <IconTrash size={16} />
                             </button>

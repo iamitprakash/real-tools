@@ -317,7 +317,7 @@ export const PDFPreview = ({
           {onClose && (
             <button
               onClick={onClose}
-              className="p-2 hover:bg-secondary rounded-lg transition-colors"
+              className="p-2 hover:bg-secondary rounded-lg transition-colors cursor-pointer"
             >
               <IconX size={20} />
             </button>
@@ -378,15 +378,15 @@ export const PDFPreview = ({
                         }}
                       >
                         {annotation.text}
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (onTextDelete) onTextDelete(globalIdx);
-                          }}
-                          className="ml-2 text-red-600 hover:text-red-800"
-                        >
-                          <IconTrash size={14} />
-                        </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (onTextDelete) onTextDelete(globalIdx);
+                      }}
+                      className="ml-2 text-red-600 hover:text-red-800 cursor-pointer"
+                    >
+                      <IconTrash size={14} />
+                    </button>
                       </div>
                     );
                   })}
@@ -399,7 +399,7 @@ export const PDFPreview = ({
                         e.stopPropagation();
                         onPageSelect?.(currentPage);
                       }}
-                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all cursor-pointer ${
                         selectedPages.includes(currentPage)
                           ? 'bg-primary text-primary-foreground'
                           : 'bg-secondary text-foreground hover:bg-secondary/80'
@@ -420,7 +420,7 @@ export const PDFPreview = ({
           <button
             onClick={prevPage}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-secondary text-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary/80 transition-all flex items-center gap-2"
+            className="px-4 py-2 bg-secondary text-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary/80 transition-all flex items-center gap-2 cursor-pointer"
           >
             <IconChevronLeft size={20} /> Previous
           </button>
@@ -430,7 +430,7 @@ export const PDFPreview = ({
               <button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
-                className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all ${
+                className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
                   currentPage === pageNum
                     ? 'bg-primary text-primary-foreground'
                     : selectedPages.includes(pageNum)
@@ -446,7 +446,7 @@ export const PDFPreview = ({
           <button
             onClick={nextPage}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-secondary text-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary/80 transition-all flex items-center gap-2"
+            className="px-4 py-2 bg-secondary text-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary/80 transition-all flex items-center gap-2 cursor-pointer"
           >
             Next <IconChevronRight size={20} />
           </button>
@@ -491,7 +491,7 @@ export const PDFPreview = ({
                 <div className="flex gap-2">
                   <button
                     onClick={saveTextEdit}
-                    className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90"
+                    className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 cursor-pointer"
                   >
                     Save
                   </button>
@@ -502,7 +502,7 @@ export const PDFPreview = ({
                       }
                       setEditingText(null);
                     }}
-                    className="px-4 py-2 bg-secondary text-foreground rounded-lg font-semibold hover:bg-secondary/80"
+                    className="px-4 py-2 bg-secondary text-foreground rounded-lg font-semibold hover:bg-secondary/80 cursor-pointer"
                   >
                     {editingText.index !== undefined ? 'Delete' : 'Cancel'}
                   </button>

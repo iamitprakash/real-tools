@@ -201,7 +201,7 @@ const DraggableFieldItem = ({
                 e.stopPropagation();
                 onRemove(field.id);
             }}
-            className="absolute -top-3 -right-3 p-1.5 bg-black text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-sm hover:scale-110 no-drag z-20"
+            className="absolute -top-3 -right-3 p-1.5 bg-black text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-sm hover:scale-110 no-drag z-20 cursor-pointer"
             title="Remove Field"
             onMouseDown={(e) => e.stopPropagation()} 
             onMouseUp={(e) => e.stopPropagation()}
@@ -440,7 +440,7 @@ export const FormBuilder = () => {
           <div className="space-y-3">
              <button
               onClick={() => addField('label')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <Type className="w-5 h-5" />
@@ -451,7 +451,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('text')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <Type className="w-5 h-5" />
@@ -462,7 +462,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('textarea')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <AlignLeft className="w-5 h-5" />
@@ -473,7 +473,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('checkbox')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <CheckSquare className="w-5 h-5" />
@@ -484,7 +484,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('radio')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <CircleDot className="w-5 h-5" />
@@ -495,7 +495,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('dropdown')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <ChevronDown className="w-5 h-5" />
@@ -506,7 +506,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('ul')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <List className="w-5 h-5" />
@@ -517,7 +517,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('ol')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <ListOrdered className="w-5 h-5" />
@@ -528,7 +528,7 @@ export const FormBuilder = () => {
 
             <button
               onClick={() => addField('signature')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/30 transition-colors text-left group cursor-pointer"
             >
               <div className="p-2 bg-zinc-700/50 text-white rounded-md group-hover:scale-110 transition-transform">
                 <PenTool className="w-5 h-5" />
@@ -543,7 +543,7 @@ export const FormBuilder = () => {
           <button
             onClick={handleExport}
             disabled={fields.length === 0 || loading}
-            className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-white/10"
+            className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-white/10 cursor-pointer"
           >
              {loading ? 'Generating...' : (
                <>

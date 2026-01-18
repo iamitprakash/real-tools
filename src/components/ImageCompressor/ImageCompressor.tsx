@@ -282,7 +282,7 @@ export const ImageCompressor = () => {
                       </div>
                       <button
                         onClick={() => handleRemoveFile(index)}
-                        className="p-2 hover:bg-destructive/10 rounded-lg transition-colors"
+                        className="p-2 hover:bg-destructive/10 rounded-lg transition-colors cursor-pointer"
                       >
                         <IconTrash className="w-4 h-4 text-destructive" />
                       </button>
