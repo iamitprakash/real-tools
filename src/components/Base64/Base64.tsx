@@ -4,7 +4,6 @@ import {
   IconCode,
   IconCopy,
   IconUpload,
-  IconRefresh,
 } from '@tabler/icons-react';
 import { encodeBase64, decodeBase64, encodeImageToBase64, validateBase64 } from '../../utils/base64';
 

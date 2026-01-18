@@ -4,7 +4,6 @@ import {
   IconQrcode,
   IconCopy,
   IconDownload,
-  IconUpload,
 } from '@tabler/icons-react';
 import { generateQRCode } from '../../utils/qrCode';
 

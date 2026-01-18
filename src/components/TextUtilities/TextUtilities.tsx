@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  IconTypography,
   IconCopy,
-  IconRefresh,
 } from '@tabler/icons-react';
 import { getTextStats, convertCase, removeDuplicates, reverseText, sortLines } from '../../utils/textUtilities';
 

@@ -1,5 +1,5 @@
 // QR Code generation using canvas (simple implementation)
-export async function generateQRCode(text: string, size: number = 200): Promise<string> {
+export async function generateQRCode(_text: string, size: number = 200): Promise<string> {
   // For a full implementation, you'd use a library like 'qrcode'
   // For now, we'll create a simple placeholder that can be enhanced
   const canvas = document.createElement('canvas');

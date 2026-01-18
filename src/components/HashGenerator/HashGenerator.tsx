@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import {
   IconHash,
   IconCopy,
-  IconRefresh,
 } from '@tabler/icons-react';
 import { generateHash, type HashAlgorithm } from '../../utils/hashGenerator';
 

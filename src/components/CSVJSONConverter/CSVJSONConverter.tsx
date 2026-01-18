@@ -4,7 +4,6 @@ import {
   IconArrowsExchange,
   IconCopy,
   IconDownload,
-  IconFileText,
 } from '@tabler/icons-react';
 import { convertCSVToJSON, convertJSONToCSV } from '../../utils/csvJsonConverter';
 
