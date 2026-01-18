@@ -129,8 +129,8 @@ export async function convertDOCXToPDF(file: File): Promise<Blob> {
     let yPosition = 800; // Start from top
     const lineHeight = 14;
     const margin = 50;
-    const pageHeight = 842;
     const pageWidth = 595;
+    let currentPage = page; // Track current page for multi-page documents
     
     // Extract text from paragraphs
     for (let i = 0; i < paragraphs.length; i++) {
@@ -146,7 +146,7 @@ export async function convertDOCXToPDF(file: File): Promise<Blob> {
       if (paragraphText.trim()) {
         // Check if we need a new page
         if (yPosition < margin + lineHeight) {
-          const newPage = pdfDoc.addPage([595, 842]);
+          currentPage = pdfDoc.addPage([595, 842]);
           yPosition = 800;
         }
         
@@ -164,7 +164,7 @@ export async function convertDOCXToPDF(file: File): Promise<Blob> {
           
           if (textWidth > pageWidth - 2 * margin && currentLine) {
             // Draw current line
-            page.drawText(currentLine, {
+            currentPage.drawText(currentLine, {
               x: margin,
               y: yPosition,
               size: 12,
@@ -176,7 +176,7 @@ export async function convertDOCXToPDF(file: File): Promise<Blob> {
             
             // Check for new page
             if (yPosition < margin + lineHeight) {
-              const newPage = pdfDoc.addPage([595, 842]);
+              currentPage = pdfDoc.addPage([595, 842]);
               yPosition = 800;
             }
           } else {
@@ -186,7 +186,7 @@ export async function convertDOCXToPDF(file: File): Promise<Blob> {
         
         // Draw remaining text
         if (currentLine) {
-          page.drawText(currentLine, {
+          currentPage.drawText(currentLine, {
             x: margin,
             y: yPosition,
             size: 12,
