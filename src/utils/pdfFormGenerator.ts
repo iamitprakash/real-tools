@@ -21,10 +21,11 @@ export interface FormField {
 }
 
 export async function generateFormPDF(fields: FormField[]): Promise<Blob> {
-  const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([595, 842]); // A4 size
-  const form = pdfDoc.getForm();
-  const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  try {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595, 842]); // A4 size
+    const form = pdfDoc.getForm();
+    const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
   // Height of A4 is 842. We need to flip Y coordinates because
   // DOM (0,0) is top-left, PDF (0,0) is bottom-left.
@@ -182,8 +183,12 @@ export async function generateFormPDF(fields: FormField[]): Promise<Blob> {
     console.warn('Could not add readonly instruction to PDF:', error);
   }
 
-  const pdfBytes = await pdfDoc.save();
-  return new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+    const pdfBytes = await pdfDoc.save();
+    return new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    throw new Error(`Failed to generate PDF: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }
 
 /**
@@ -192,13 +197,18 @@ export async function generateFormPDF(fields: FormField[]): Promise<Blob> {
  * @returns A new PDF blob with all fields flattened (readonly)
  */
 export async function makePDFReadonly(pdfFile: File | Blob): Promise<Blob> {
-  const arrayBuffer = await pdfFile.arrayBuffer();
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
-  const form = pdfDoc.getForm();
-  
-  // Flatten all form fields - this makes them non-editable
-  form.flatten();
-  
-  const pdfBytes = await pdfDoc.save();
-  return new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+  try {
+    const arrayBuffer = await pdfFile.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const form = pdfDoc.getForm();
+    
+    // Flatten all form fields - this makes them non-editable
+    form.flatten();
+    
+    const pdfBytes = await pdfDoc.save();
+    return new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+  } catch (error) {
+    console.error('Error making PDF readonly:', error);
+    throw new Error(`Failed to process PDF: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }

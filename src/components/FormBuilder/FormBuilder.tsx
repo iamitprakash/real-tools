@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import Draggable, { type DraggableData, type DraggableEvent } from 'react-draggable';
 import { motion } from 'framer-motion';
+import type { DraggableData, DraggableEvent } from 'react-draggable';
 import {
   IconTypography as Type,
   IconCheck as CheckSquare,
@@ -36,7 +36,19 @@ const DraggableFieldItem = ({
 }) => {
   const nodeRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [DraggableComponent, setDraggableComponent] = useState<any>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Dynamically import react-draggable only on client side
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      import('react-draggable').then((module) => {
+        setDraggableComponent(() => module.default);
+      }).catch((error) => {
+        console.error('Failed to load react-draggable:', error);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -80,12 +92,27 @@ const DraggableFieldItem = ({
     document.addEventListener('mouseup', handleMouseUp);
   };
 
+  // Fallback if Draggable hasn't loaded yet
+  if (!DraggableComponent) {
+    return (
+      <div
+        ref={nodeRef}
+        className="absolute group"
+        style={{ width: field.width, height: field.height, left: field.x, top: field.y }}
+      >
+        <div className="w-full h-full border-2 rounded-md bg-zinc-50 border-zinc-400 flex items-center justify-center">
+          <span className="text-xs text-zinc-400">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <Draggable
+    <DraggableComponent
       nodeRef={nodeRef}
       bounds="parent"
       defaultPosition={{ x: field.x, y: field.y }}
-      onStop={(e, data) => onDragStop(field.id, e, data)}
+      onStop={(e: DraggableEvent, data: DraggableData) => onDragStop(field.id, e, data)}
       onStart={() => isEditing ? false : undefined} // Prevent dragging while editing text
       cancel=".no-drag"
     >
@@ -237,7 +264,7 @@ const DraggableFieldItem = ({
           </div>
         </div>
       </div>
-    </Draggable>
+    </DraggableComponent>
   );
 };
 
@@ -374,6 +401,9 @@ export const FormBuilder = () => {
     setLoading(true);
     try {
       const blob = await generateFormPDF(fields);
+      if (!blob || blob.size === 0) {
+        throw new Error('Failed to generate PDF: empty blob');
+      }
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -384,6 +414,7 @@ export const FormBuilder = () => {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Failed to generate PDF', error);
+      alert('Failed to generate PDF. Please try again. Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -391,11 +422,17 @@ export const FormBuilder = () => {
 
   const handleMakeReadonly = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file || file.type !== 'application/pdf') return;
+    if (!file || file.type !== 'application/pdf') {
+      alert('Please select a valid PDF file');
+      return;
+    }
 
     setReadonlyLoading(true);
     try {
       const readonlyBlob = await makePDFReadonly(file);
+      if (!readonlyBlob || readonlyBlob.size === 0) {
+        throw new Error('Failed to process PDF: empty blob');
+      }
       const url = URL.createObjectURL(readonlyBlob);
       const a = document.createElement('a');
       a.href = url;
@@ -406,6 +443,7 @@ export const FormBuilder = () => {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Failed to make PDF readonly', error);
+      alert('Failed to process PDF. Please try again. Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setReadonlyLoading(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
