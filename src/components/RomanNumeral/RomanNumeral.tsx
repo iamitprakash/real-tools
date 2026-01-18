@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { IconHash, IconCopy, IconArrowsExchange } from '@tabler/icons-react';
+import { IconHash, IconCopy } from '@tabler/icons-react';
 import { useToast } from '../ui/toast';
 
 const romanValues: [number, string][] = [

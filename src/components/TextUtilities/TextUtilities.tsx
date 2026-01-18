@@ -10,6 +10,7 @@ export const TextUtilities = () => {
   const [text, setText] = useState('');
   const [output, setOutput] = useState('');
   const [stats, setStats] = useState<any>(null);
+  const { showToast } = useToast();
 
   const handleStats = () => {
     const result = getTextStats(text);

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { IconPhoto, IconDownload, IconCrop } from '@tabler/icons-react';
+import { IconDownload, IconCrop } from '@tabler/icons-react';
 import { FileUpload } from '../ui/file-upload';
 import { useToast } from '../ui/toast';
 
@@ -8,8 +8,6 @@ export const ImageCropper = () => {
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [cropArea, setCropArea] = useState({ x: 0, y: 0, width: 100, height: 100 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [croppedUrl, setCroppedUrl] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { showToast } = useToast();
